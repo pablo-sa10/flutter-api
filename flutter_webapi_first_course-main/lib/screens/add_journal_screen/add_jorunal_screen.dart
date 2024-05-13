@@ -7,7 +7,6 @@ class AddJournalScreen extends StatelessWidget {
 
   const AddJournalScreen({super.key, required this.journal});
 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
