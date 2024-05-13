@@ -8,7 +8,7 @@ void main() {
 
   JournalService service = JournalService();
   service.register("santosssss!");
-  service.get();
+  //service.get();
 
 }
 
