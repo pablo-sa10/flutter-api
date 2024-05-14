@@ -3,30 +3,50 @@
     {
       "id": "5e6e",
       "content": ""
+    }
+  ],
+  "journals": [
+    {
+      "id": "689173f0-11f4-11ef-8f7e-63b40c0c68cc",
+      "content": "",
+      "created_at": "2024-05-14 13:18:09.601007",
+      "update_at": "2024-05-14 13:18:09.601028"
     },
     {
-      "id": "73ff",
-      "content": "Olá mundo!"
+      "id": "e9d799f0-11f7-11ef-b176-8f1bddbee139",
+      "content": "ai q saudade da minha ex mdsssss",
+      "created_at": "2024-05-06 13:42:52.517972",
+      "update_at": "2024-05-06 13:42:52.517972"
     },
     {
-      "id": "4cd8",
-      "content": "santosssss!"
+      "id": "1affc280-11fa-11ef-9612-2fe677e8284a",
+      "content": "oiii",
+      "created_at": "2024-05-04 13:58:43.570142",
+      "update_at": "2024-05-04 13:58:43.570142"
     },
     {
-      "id": "be9a",
-      "content": "santosssss!"
+      "id": "c0fb0890-11fd-11ef-a8f6-c927097b7707",
+      "content": "que saudade da minha ex",
+      "created_at": "2024-05-04 14:21:06.261744",
+      "update_at": "2024-05-04 14:21:06.261744"
     },
     {
-      "id": "d228",
-      "content": "santosssss!"
+      "id": "a0eda930-11fe-11ef-9d31-21d5b22417b5",
+      "content": "eu mao minha ex mulher",
+      "created_at": "2024-05-12 14:31:05.233485",
+      "update_at": "2024-05-12 14:31:05.233485"
     },
     {
-      "id": "db6b",
-      "content": "santosssss!"
+      "id": "875df870-11ff-11ef-9d31-21d5b22417b5",
+      "content": "aiiii chavinho",
+      "created_at": "2024-05-06 14:31:05.233485",
+      "update_at": "2024-05-06 14:31:05.233485"
     },
     {
-      "id": "d798",
-      "content": "santosssss!"
+      "id": "7aea9a70-1200-11ef-9d31-21d5b22417b5",
+      "content": "",
+      "created_at": "2024-05-11 14:31:05.233485",
+      "update_at": "2024-05-11 14:31:05.233485"
     }
   ]
 }
