@@ -45,8 +45,6 @@ class JournalService {
     for(var jsonMap in listDynamic){
       list.add(Journal.fromMap(jsonMap));
     }
-
-    print(list.length);
     return list;
   }
 }

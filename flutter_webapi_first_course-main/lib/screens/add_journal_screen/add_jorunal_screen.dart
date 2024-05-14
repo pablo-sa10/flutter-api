@@ -38,7 +38,7 @@ class AddJournalScreen extends StatelessWidget {
     );
   }
 
-  registerJournal(BuildContext context) async{
+  registerJournal(context) async{
     String content = _contentController.text;
 
     journal.content = content;
