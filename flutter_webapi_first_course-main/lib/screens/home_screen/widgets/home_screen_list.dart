@@ -21,7 +21,11 @@ List<JournalCard> generateListJournalCards({
     if (value.createdAt
         .isAfter(currentDay.subtract(Duration(days: windowPage)))) {
       int difference = value.createdAt
-          .difference(currentDay.subtract(Duration(days: windowPage)))
+          .difference(
+            currentDay.subtract(
+              Duration(days: windowPage),
+            ),
+          )
           .inDays
           .abs();
 
