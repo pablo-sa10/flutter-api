@@ -5,7 +5,18 @@
       "content": ""
     }
   ],
-  "users": [],
+  "users": [
+    {
+      "email": "pablo@gmail.com",
+      "password": "$2a$10$mY0gPrH/uPkcfEhjEXugpe01yOBjvC/uPmcgvUJYeGKJE2.nv9/Y.",
+      "id": 1
+    },
+    {
+      "email": "diogo@gmail.com",
+      "password": "$2a$10$AJpnVqSFLHjAfdApazffde7NOOheoDWpJQgWEUhDOoiR4h6lgahoe",
+      "id": 2
+    }
+  ],
   "journals": [
     {
       "id": "a0eda930-11fe-11ef-9d31-21d5b22417b5",
