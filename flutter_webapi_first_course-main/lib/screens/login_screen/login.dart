@@ -80,6 +80,16 @@ class _LoginScreenState extends State<LoginScreen> {
       service.login(email: email, password: password).then((resultLogin){
         if(resultLogin){
           Navigator.pushReplacementNamed(context, "home");
+        }else{
+          showConfirmationDialog(context, content: "Deseja criar um novo usuário usando o email $email?", affirmative: "Criar").then((value){
+            if(value != null && value){
+              service.register(email: email, password: password).then((resultRegister){
+                if(resultRegister){
+                  Navigator.pushReplacementNamed(context, "home");
+                }
+              });
+            }
+          });
         }
       });
     }on UserNotfind{
