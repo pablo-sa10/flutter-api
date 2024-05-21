@@ -18,11 +18,14 @@ class JournalService {
     return "$url$resource";
   }
 
-  Future<bool> register(Journal journal) async {
+  Future<bool> register(Journal journal, String token) async {
     String jsonJournal = json.encode(journal.toMap());
     http.Response response = await client.post(
       Uri.parse(getUrl()),
-      headers: {'ContentType': 'application/json'},
+      headers: {
+        'Content-Type': 'application/json',
+        "Authorization": "Bearer $token",
+      },
       body: jsonJournal,
     );
     if (response.statusCode == 201) {
@@ -31,12 +34,15 @@ class JournalService {
     return false;
   }
 
-  Future<bool> edit(String id, Journal journal) async {
+  Future<bool> edit(String id, Journal journal, String token) async {
     String jsonJournal = json.encode(journal.toMap());
 
     http.Response response = await client.put(
       Uri.parse("${getUrl()}$id"),
-      headers: {'ContentType': 'application/json'},
+      headers: {
+        'Content-Type': 'application/json',
+        "Authorization": "Bearer $token",
+      },
       body: jsonJournal,
     );
 
@@ -55,7 +61,7 @@ class JournalService {
     );
     if (response.statusCode != 200) {
       //Se token estiver expirado ele volta para tela de login
-      if(response.body.contains("jwt expired")){
+      if (response.body.contains("jwt expired")) {
         AuthService auth = AuthService();
         auth.deleteUserInfos();
       }
@@ -71,8 +77,11 @@ class JournalService {
     return list;
   }
 
-  Future<bool> delete(String id) async {
-    http.Response response = await http.delete(Uri.parse("${getUrl()}$id"));
+  Future<bool> delete(String id, String token) async {
+    http.Response response = await http.delete(
+      Uri.parse("${getUrl()}$id"),
+      headers: {"Authorization": "Bearer $token"},
+    );
     if (response.statusCode == 200) {
       return true;
     }
