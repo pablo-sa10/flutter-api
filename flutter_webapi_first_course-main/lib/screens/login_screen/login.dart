@@ -2,11 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_webapi_first_course/screens/commom/confirmation_dialog.dart';
 import 'package:flutter_webapi_first_course/services/auth_service.dart';
 
-class LoginScreen extends StatelessWidget {
-  LoginScreen({Key? key}) : super(key: key);
+class LoginScreen extends StatefulWidget {
+  const LoginScreen({Key? key}) : super(key: key);
 
-  TextEditingController _emailController = TextEditingController();
-  TextEditingController _passController = TextEditingController();
+  @override
+  State<LoginScreen> createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends State<LoginScreen> {
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passController = TextEditingController();
 
   AuthService service = AuthService();
 
@@ -67,16 +72,24 @@ class LoginScreen extends StatelessWidget {
     );
   }
 
-  Login(BuildContext context)async{
+  Login(BuildContext context) {
     String email = _emailController.text;
     String password = _passController.text;
 
     try{
-      bool result = await service.login(email: email, password: password);
+      service.login(email: email, password: password).then((resultLogin){
+        if(resultLogin){
+          Navigator.pushReplacementNamed(context, "home");
+        }
+      });
     }on UserNotfind{
-      showConfirmationDialog(context, content: "Deseja criar um novo usuário usando o email ${email}?", affirmative: "Criar").then((value){
+      showConfirmationDialog(context, content: "Deseja criar um novo usuário usando o email $email?", affirmative: "Criar").then((value){
         if(value != null && value){
-          service.register(email: email, password: password);
+          service.register(email: email, password: password).then((resultRegister){
+            if(resultRegister){
+              Navigator.pushReplacementNamed(context, "home");
+            }
+          });
         }
       });
     }

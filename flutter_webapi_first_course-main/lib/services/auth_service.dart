@@ -28,7 +28,7 @@ class AuthService {
     return true;
   }
 
-  register({required String email, required String password}) async{
+  Future<bool> register({required String email, required String password}) async{
     http.Response response = await client.post(Uri.parse('${url}register'),
         body: {'email': email, 'password': password});
     
@@ -37,19 +37,20 @@ class AuthService {
     }
 
     saveUserInfos(response.body);
+    return true;
   }
 
   saveUserInfos(String body) async{
     Map<String, dynamic> map = json.decode(body);
 
     String token = map["accessToken"];
-    String email = map["user"]["emial"];
-    String id = map["user"]["id"];
+    String email = map["user"]["email"];
+    int id = map["user"]["id"];
 
     SharedPreferences preferences = await SharedPreferences.getInstance();
     preferences.setString("accessToken", token);
     preferences.setString("email", email);
-    preferences.setString("id", id);
+    preferences.setInt("id", id);
   }
 }
 

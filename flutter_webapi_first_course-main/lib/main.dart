@@ -1,21 +1,39 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_webapi_first_course/models/journal.dart';
 import 'package:flutter_webapi_first_course/screens/add_journal_screen/add_jorunal_screen.dart';
 import 'package:flutter_webapi_first_course/screens/login_screen/login.dart';
-import 'package:flutter_webapi_first_course/services/journal_service.dart';
+//import 'package:flutter_webapi_first_course/services/journal_service.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'screens/home_screen/home_screen.dart';
 
-void main() {
-  runApp(const MyApp());
+void main() async{
+  WidgetsFlutterBinding.ensureInitialized();
 
-  JournalService service = JournalService();
+  bool isLogged = await verifyToken();
+  runApp(MyApp(isLogged: isLogged,));
+  //JournalService service = JournalService();
   //service.register(Journal.empty());
   //service.getAll();
 }
 
+Future<bool> verifyToken() async{
+  SharedPreferences preferences = await SharedPreferences.getInstance();
+  String? token = preferences.getString("accessToken");
+  print(token);
+  if(token != null){
+    print("é true");
+    return true;
+  }
+  print("é false");
+  return false;
+}
+
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+  final bool isLogged;
+  const MyApp({Key? key, required this.isLogged }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -37,10 +55,10 @@ class MyApp extends StatelessWidget {
           textTheme: GoogleFonts.bitterTextTheme()),
       darkTheme: ThemeData.dark(),
       themeMode: ThemeMode.light,
-      initialRoute: "login",
+      initialRoute: (isLogged)? "home" : "login",
       routes: {
         "home": (context) => const HomeScreen(),
-        "login": (context) => LoginScreen(),
+        "login": (context) => const LoginScreen(),
       },
       onGenerateRoute: (settings) {
         if (settings.name == "add-journal") {
