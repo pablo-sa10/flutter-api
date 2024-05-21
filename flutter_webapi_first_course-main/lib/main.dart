@@ -22,12 +22,9 @@ void main() async{
 Future<bool> verifyToken() async{
   SharedPreferences preferences = await SharedPreferences.getInstance();
   String? token = preferences.getString("accessToken");
-  print(token);
   if(token != null){
-    print("é true");
     return true;
   }
-  print("é false");
   return false;
 }
 
