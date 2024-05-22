@@ -1,8 +1,12 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_webapi_first_course/helpers/weekday.dart';
 import 'package:flutter_webapi_first_course/services/journal_service.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import '../../helpers/logout.dart';
 import '../../models/journal.dart';
+import '../commom/exception_dialog.dart';
 
 class AddJournalScreen extends StatelessWidget {
   final Journal journal;
@@ -43,20 +47,34 @@ class AddJournalScreen extends StatelessWidget {
   }
 
   registerJournal(context) {
-    SharedPreferences.getInstance().then((preferences){
+    SharedPreferences.getInstance().then((preferences) {
       String? token = preferences.getString("accessToken");
-      if(token != null){
+      if (token != null) {
         String content = _contentController.text;
         journal.content = content;
 
         JournalService service = JournalService();
 
-        if(isEditing){
+        if (isEditing) {
           service.register(journal, token);
         }
         service.edit(journal.id, journal, token).then((value) {
           Navigator.pop(context, value);
-        });
+        }).catchError(
+          (error) {
+            Logout(context);
+          },
+          test: (error) => error is TokenException,
+        ).catchError(
+          (error) {
+            var innerError = error as HttpException;
+            showExceptionDialog(
+              context,
+              content: innerError.message,
+            );
+          },
+          test: (error) => error is HttpException,
+        );
       }
     });
   }

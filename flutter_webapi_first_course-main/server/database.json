@@ -15,6 +15,11 @@
       "email": "diogo@gmail.com",
       "password": "$2a$10$AJpnVqSFLHjAfdApazffde7NOOheoDWpJQgWEUhDOoiR4h6lgahoe",
       "id": 2
+    },
+    {
+      "email": "pablo2@gmail.com",
+      "password": "$2a$10$H1KwE4IOkM.tAnTz9oYSQ.Pxuq6vHpSsvmgcLpB33CBP289/EKqV.",
+      "id": 3
     }
   ],
   "journals": [
@@ -59,6 +64,13 @@
       "created_at": "2024-05-16 18:14:39.178988",
       "update_at": "2024-05-16 18:14:39.178988",
       "userId": 2
+    },
+    {
+      "id": "07f15140-183a-11ef-8bf7-17b7540438f0",
+      "content": "chamaaaaa aaa",
+      "created_at": "2024-05-14 12:23:11.131600",
+      "update_at": "2024-05-14 12:23:11.131600",
+      "userId": 3
     }
   ]
 }

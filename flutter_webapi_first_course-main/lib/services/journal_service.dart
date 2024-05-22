@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 
 //import 'dart:nativewrappers/_internal/vm/lib/core_patch.dart';
 import 'package:flutter_webapi_first_course/models/journal.dart';
@@ -28,10 +29,13 @@ class JournalService {
       },
       body: jsonJournal,
     );
-    if (response.statusCode == 201) {
-      return true;
+    if (response.statusCode != 201) {
+      if(json.decode(response.body) == "jwt expired"){
+        throw TokenException();
+      }
+      throw HttpException(response.body);
     }
-    return false;
+    return true;
   }
 
   Future<bool> edit(String id, Journal journal, String token) async {
@@ -46,11 +50,14 @@ class JournalService {
       body: jsonJournal,
     );
 
-    if (response.statusCode == 200) {
-      return true;
+    if (response.statusCode != 200) {
+      if(json.decode(response.body) == "jwt expired"){
+        throw TokenException();
+      }
+      throw HttpException(response.body);
     }
 
-    return false;
+    return true;
   }
 
   Future<List<Journal>> getAll(
@@ -82,9 +89,16 @@ class JournalService {
       Uri.parse("${getUrl()}$id"),
       headers: {"Authorization": "Bearer $token"},
     );
-    if (response.statusCode == 200) {
-      return true;
+    if (response.statusCode != 200) {
+      if(json.decode(response.body) == "jwt expired"){
+        throw TokenException();
+      }
+      throw HttpException(response.body);
     }
-    return false;
+    return true;
   }
+}
+
+class TokenException implements Exception{
+
 }
